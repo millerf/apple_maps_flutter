@@ -12,22 +12,7 @@ extension AppleMapController: AnnotationDelegate {
 
     public func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView)  {
         if let annotation: FlutterAnnotation = view.annotation as? FlutterAnnotation  {
-            self.currentlySelectedAnnotation = annotation.id
-            if !annotation.selectedProgrammatically {
-                if !self.isAnnotationInFront(zIndex: annotation.zIndex) {
-                    self.moveToFront(annotation: annotation)
-                }
-                self.onAnnotationClick(annotation: annotation)
-            } else {
-                annotation.selectedProgrammatically = false
-            }
-
-            if annotation.infoWindowConsumesTapEvents {
-                let tapGestureRecognizer = InfoWindowTapGestureRecognizer(target: self, action: #selector(onCalloutTapped))
-                tapGestureRecognizer.annotationId = annotation.id
-                tapGestureRecognizer.annotationView = view
-                view.addGestureRecognizer(tapGestureRecognizer)
-            }
+            self.onAnnotationClick(annotation: annotation)
         }
     }
 
