@@ -6,7 +6,6 @@ import 'dart:async';
 
 import 'package:apple_maps_flutter/apple_maps_flutter.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_driver/driver_extension.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'apple_map_inspector.dart';
@@ -18,7 +17,6 @@ const CameraPosition _kInitialCameraPosition =
 
 void main() {
   final Completer<String> allTestsCompleter = Completer<String>();
-  enableFlutterDriverExtension(handler: (_) => allTestsCompleter.future);
 
   tearDownAll(() => allTestsCompleter.complete(''));
 
