@@ -311,7 +311,9 @@ class _AppleMapState extends State<AppleMap> {
 
   void onAnnotationZIndexChanged(String annotationIdParam, double zIndex) {
     final AnnotationId annotationId = AnnotationId(annotationIdParam);
-    _annotations[annotationId]?.zIndex = zIndex;
+    _annotations[annotationId] = _annotations[annotationId]!.copyWith(
+      zIndexParam: zIndex,
+    );
   }
 
   void onTap(LatLng position) {

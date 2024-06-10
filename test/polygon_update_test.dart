@@ -41,7 +41,7 @@ void main() {
       FakePlatformViewsController();
 
   setUpAll(() {
-    SystemChannels.platform_views.setMockMethodCallHandler(
+    SystemChannels.platform_views.setMethodCallHandler(
         fakePlatformViewsController.fakePlatformViewsMethodHandler);
   });
 
