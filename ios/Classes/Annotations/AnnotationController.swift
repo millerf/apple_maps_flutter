@@ -12,7 +12,11 @@ extension AppleMapController: AnnotationDelegate {
 
     public func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView)  {
         if let annotation: FlutterAnnotation = view.annotation as? FlutterAnnotation  {
+            self.currentlySelectedAnnotation = annotation.id
             self.onAnnotationClick(annotation: annotation)
+            if !self.isAnnotationInFront(zIndex: annotation.zIndex) {
+                self.moveToFront(annotation: annotation)
+            }
         }
     }
 
@@ -108,6 +112,8 @@ extension AppleMapController: AnnotationDelegate {
     }
 
     func selectAnnotation(with id: String) {
+        // Prevent selecting annotation
+        return;
         if let annotation: FlutterAnnotation = self.getAnnotation(with: id) {
             annotation.selectedProgrammatically = true
             self.mapView.selectAnnotation(annotation, animated: true)
