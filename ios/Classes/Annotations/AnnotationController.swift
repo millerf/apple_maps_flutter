@@ -14,9 +14,9 @@ extension AppleMapController: AnnotationDelegate {
         if let annotation: FlutterAnnotation = view.annotation as? FlutterAnnotation  {
             self.currentlySelectedAnnotation = annotation.id
             self.onAnnotationClick(annotation: annotation)
-//             if !self.isAnnotationInFront(zIndex: annotation.zIndex) {
-//                 self.moveToFront(annotation: annotation)
-//             }
+            if !self.isAnnotationInFront(zIndex: annotation.zIndex) {
+                self.moveToFront(annotation: annotation)
+            }
         }
     }
 
@@ -159,8 +159,6 @@ extension AppleMapController: AnnotationDelegate {
     }
 
     @objc func onCalloutTapped(infoWindowTap: InfoWindowTapGestureRecognizer) {
-
-        return;
         if infoWindowTap.annotationId != nil && self.currentlySelectedAnnotation == infoWindowTap.annotationId! {
             self.channel.invokeMethod("infoWindow#onTap", arguments: ["annotationId": infoWindowTap.annotationId])
         }
